@@ -1,4 +1,4 @@
-jest.mock('got');
+vi.mock('got');
 
 import intoStream from 'into-stream';
 import MemoryStream from 'memorystream';

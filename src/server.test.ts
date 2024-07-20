@@ -1,4 +1,4 @@
-jest.mock('child_process');
+vi.mock('child_process');
 
 import childProcess from 'child_process';
 import {startServer} from './server';
@@ -9,7 +9,7 @@ it('should throw if artifact path is not provided', () => {
 
 it('should call exec to spawn a Tika Server', async () => {
   childProcess.exec.mockReturnValueOnce({
-    stderr: {on: jest.fn((_, cb) => cb('INFO: Started'))},
+    stderr: {on: vi.fn((_, cb) => cb('INFO: Started'))},
   });
 
   await startServer('/tmp/tika.jar');
@@ -19,7 +19,7 @@ it('should call exec to spawn a Tika Server', async () => {
 
 it('should call exec to spawn a Tika Server v1 with custom java path', async () => {
   childProcess.exec.mockReturnValueOnce({
-    stderr: {on: jest.fn((_, cb) => cb('INFO: Started'))},
+    stderr: {on: vi.fn((_, cb) => cb('INFO: Started'))},
   });
 
   await startServer('/tmp/tika.jar', {
@@ -34,7 +34,7 @@ it('should call exec to spawn a Tika Server v1 with custom java path', async () 
 
 it('should call exec to spawn a Tika Server with custom java path', async () => {
   childProcess.exec.mockReturnValueOnce({
-    stderr: {on: jest.fn((_, cb) => cb('INFO: Started'))},
+    stderr: {on: vi.fn((_, cb) => cb('INFO: Started'))},
   });
 
   await startServer('/tmp/tika.jar', {executableJavaPath: '/bin/jre/java'});
@@ -44,7 +44,7 @@ it('should call exec to spawn a Tika Server with custom java path', async () => 
 
 it('should call exec to spawn a Tika Server and align with Java 8 version', async () => {
   childProcess.exec.mockReturnValueOnce({
-    stderr: {on: jest.fn((_, cb) => cb('INFO: Started'))},
+    stderr: {on: vi.fn((_, cb) => cb('INFO: Started'))},
   });
 
   await startServer('/tmp/tika.jar', {alignWithJava8: true});
@@ -55,7 +55,7 @@ it('should call exec to spawn a Tika Server and align with Java 8 version', asyn
 it('should reject if some Java exception occurs', async () => {
   childProcess.exec.mockReturnValueOnce({
     stderr: {
-      on: jest.fn((_, cb) => cb('java.net.BindException: Address already in use')),
+      on: vi.fn((_, cb) => cb('java.net.BindException: Address already in use')),
     },
   });
 
@@ -69,7 +69,7 @@ it('should reject if some Java exception occurs', async () => {
 it('should reject if file not found', async () => {
   childProcess.exec.mockReturnValueOnce({
     stderr: {
-      on: jest.fn((_, cb) => cb('Error: Unable to access jarfile')),
+      on: vi.fn((_, cb) => cb('Error: Unable to access jarfile')),
     },
   });
 
